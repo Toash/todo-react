@@ -1,61 +1,68 @@
-import { useState } from "react"
-import TodoItems from "./TodoItems";
+import { useState } from "react";
+import Todo from "./Todo";
+import TodoForm from "./TodoForm";
 
 function TodoList() {
+  const [todos, setTodos] = useState([]);
 
-    const [taskInput, setTaskInput] = useState("")
-    const [taskItems, setTaskItems] = useState([]);
-
-    function addItem(event) {
-        event.preventDefault() //for submit button
-
-        //if no input, return
-        if (taskInput.trim() == "") {
-            return
-        }
-
-        // object
-        const newItem = {
-            key: Date.now(),
-            text: taskInput
-        }
-
-        // parameter is a callback
-        setTaskItems((prevItems) => prevItems.concat(newItem))
-
-
-        setTaskInput('')
-
-        event.target.task.focus();
+  function handleSubmit(event) {
+    event.preventDefault();
+    addTodo();
+    event.target.task.focus();
+  }
+  function addTodo(todo) {
+    //if no input, return
+    if (todo.text.trim() === "") {
+      return;
     }
 
-    function deleteItem(key) {
-        // Filter the array and excludes all with the key.
-        setTaskItems((prevItems) => prevItems.filter((item) => item.key !== key))
-    }
+    //add todo to list
+    setTodos((prevItems) => prevItems.concat(todo));
+  }
 
-    return (
-        <>
-            <h1>Todo List</h1>
-            <div className="d-flex justify-content-around">
-                <div>
-                    <form onSubmit={addItem}>
-                        <label className="mx-2 block font-weight-bold" htmlFor="task">What to do?</label>
-                        <div>
-                            <input className="mx-2" id="task" type="text" autoFocus value={taskInput} onChange={(e) => setTaskInput(e.target.value)} />
-                            <button className="mx-2" type="submit">Add</button>
-                        </div>
-                    </form>
-                    <TodoItems items={taskItems} delete={deleteItem} />
-                </div>
-                <div>
-                    <h2>Completed</h2>
-                </div>
-            </div>
+  function editTodo(id, newTodo) {
+    // go through list, if item in list, change it to new val
 
+    setTodos((prev) => prev.map((todo) => (todo.id === id ? newTodo : todo)));
+  }
 
-        </>
-    )
+  function deleteTodo(id) {
+    // Filter the array and excludes all with the key.
+    setTodos((prevItems) => prevItems.filter((item) => item.id !== id));
+  }
+
+  function completeTodo(id) {
+    let updatedTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        todo.isComplete = !todo.isComplete;
+      }
+      //return todo
+    });
+    setTodos(updatedTodos);
+  }
+
+  return (
+    <>
+      <h1>Todo List</h1>
+      <div className="d-flex-column justify-content-around">
+        <div>
+          <TodoForm
+            promptText="What to do?"
+            confirmText="Add"
+            onSubmit={addTodo}
+          />
+        </div>
+        <div>
+          <Todo
+            todos={todos}
+            completeTodo={completeTodo}
+            deleteTodo={deleteTodo}
+            editTodo={editTodo}
+          />
+        </div>
+      </div>
+    </>
+  );
 }
 
-export default TodoList
+export default TodoList;
