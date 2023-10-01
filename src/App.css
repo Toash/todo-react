@@ -5,11 +5,12 @@
 
 .todo-background{
     margin-top: 170px;
-    background-color: white;
+    background-color: #e9ebf2;
     padding: 20px;
     border-radius:20px;
+    box-shadow: 5px 5px;
 }
 
 body{
-    background-color: #F0F0F0;
+    background-color: #6e768f;
 }

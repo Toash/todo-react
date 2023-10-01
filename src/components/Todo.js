@@ -61,15 +61,17 @@ function Todo({ todos, setTodos, completeTodo, deleteTodo, editTodo }) {
                 >
                   {(provided) => (
                     <div
-                      className="todo-item"
+                      className="todo-item p-2"
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <div onMouseOver={console.log("dfasdf")}>
+                      <div>
                         <div className="d-flex justify-content-between">
-                          <div>{todo.text}</div>
-                          <div>
+                          <div className="bg-primary w-75">
+                            <div className=" text-break">{todo.text}</div>
+                          </div>
+                          <div className="bg-primary">
                             <button
                               onClick={() =>
                                 setEdit({ id: todo.id, text: todo.text })
