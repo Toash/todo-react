@@ -71,15 +71,19 @@ function Todo({ todos, setTodos, completeTodo, deleteTodo, editTodo }) {
                           <div className="w-75">
                             <div className=" text-break">{todo.text}</div>
                           </div>
-                          <div className="d-flex flex-wowrap">
+                          <div className="d-flex flex-wowrap align-items-start">
                             <button
+                              className="btn btn-sm btn-secondary mx-2"
                               onClick={() =>
                                 setEdit({ id: todo.id, text: todo.text })
                               }
                             >
                               Edit
                             </button>
-                            <button onClick={() => deleteTodo(todo.id)}>
+                            <button
+                              className="btn btn-sm btn-danger"
+                              onClick={() => deleteTodo(todo.id)}
+                            >
                               Delete
                             </button>
                           </div>

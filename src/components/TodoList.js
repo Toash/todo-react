@@ -43,7 +43,7 @@ function TodoList() {
 
   return (
     <div className="d-flex justify-content-center">
-      <div className="todo-background w-75">
+      <div className="todo-background">
         <h1 className="text-center">Todo List</h1>
         <p className="text-center">By Justin Ho</p>
         <div className="d-flex-column justify-content-around">

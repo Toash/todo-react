@@ -20,12 +20,12 @@ function TodoForm({ onSubmit, promptText, confirmText = "Submit" }) {
   return (
     <form onSubmit={handleSubmit}>
       <div className="d-flex flex-nowrap justify-content-center">
-        <label className="mx-2" htmlFor="task">
+        <label className="mx-2 text-nowrap" htmlFor="task">
           {promptText}
         </label>
 
         <input
-          className="mx-2"
+          className="mx-2 form-control input-lg"
           id="task"
           type="text"
           autoFocus
@@ -33,7 +33,7 @@ function TodoForm({ onSubmit, promptText, confirmText = "Submit" }) {
           onChange={(e) => setInput(e.target.value)}
         />
 
-        <button className="mx-2" type="submit">
+        <button className="mx-2 btn btn-primary" type="submit">
           {confirmText}
         </button>
       </div>
