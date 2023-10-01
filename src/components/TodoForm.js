@@ -19,7 +19,7 @@ function TodoForm({ onSubmit, promptText, confirmText = "Submit" }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label className="mx-2 block font-weight-bold" htmlFor="task">
+      <label className="mx-2" htmlFor="task">
         {promptText}
       </label>
 

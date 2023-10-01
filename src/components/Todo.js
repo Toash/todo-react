@@ -52,7 +52,7 @@ function Todo({ todos, setTodos, completeTodo, deleteTodo, editTodo }) {
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="my-droppable">
           {(provided) => (
-            <ol {...provided.droppableProps} ref={provided.innerRef}>
+            <ul {...provided.droppableProps} ref={provided.innerRef}>
               {todos.map((todo, index) => (
                 <Draggable
                   key={todo.id}
@@ -60,31 +60,34 @@ function Todo({ todos, setTodos, completeTodo, deleteTodo, editTodo }) {
                   index={index}
                 >
                   {(provided) => (
-                    <li
+                    <div
+                      className="todo-item"
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <div className="d-flex justify-content-between">
-                        <div>{todo.text}</div>
-                        <div>
-                          <button
-                            onClick={() =>
-                              setEdit({ id: todo.id, text: todo.text })
-                            }
-                          >
-                            Edit
-                          </button>
-                          <button onClick={() => deleteTodo(todo.id)}>
-                            Delete
-                          </button>
+                      <div onMouseOver={console.log("dfasdf")}>
+                        <div className="d-flex justify-content-between">
+                          <div>{todo.text}</div>
+                          <div>
+                            <button
+                              onClick={() =>
+                                setEdit({ id: todo.id, text: todo.text })
+                              }
+                            >
+                              Edit
+                            </button>
+                            <button onClick={() => deleteTodo(todo.id)}>
+                              Delete
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </li>
+                    </div>
                   )}
                 </Draggable>
               ))}
-            </ol>
+            </ul>
           )}
         </Droppable>
       </DragDropContext>

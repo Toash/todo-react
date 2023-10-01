@@ -42,12 +42,12 @@ function TodoList() {
   }
 
   return (
-    <div className="d-flex justify-content-center mt-5">
-      <div className="bg-light p-5 rounded">
+    <div className="d-flex justify-content-center">
+      <div className="todo-background">
         <h1 className="text-center">Todo List</h1>
         <p className="text-center">By Justin Ho</p>
         <div className="d-flex-column justify-content-around">
-          <div className="text-center mb-4">
+          <div className="mb-4">
             <TodoForm
               promptText="What to do?"
               confirmText="Add"

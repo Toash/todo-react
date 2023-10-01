@@ -1,0 +1,15 @@
+.todo-item:hover{
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
+.todo-background{
+    margin-top: 170px;
+    background-color: white;
+    padding: 20px;
+    border-radius:20px;
+}
+
+body{
+    background-color: #F0F0F0;
+}
