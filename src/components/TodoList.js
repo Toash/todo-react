@@ -42,26 +42,30 @@ function TodoList() {
   }
 
   return (
-    <>
-      <h1>Todo List</h1>
-      <div className="d-flex-column justify-content-around">
-        <div>
-          <TodoForm
-            promptText="What to do?"
-            confirmText="Add"
-            onSubmit={addTodo}
-          />
-        </div>
-        <div>
-          <Todo
-            todos={todos}
-            completeTodo={completeTodo}
-            deleteTodo={deleteTodo}
-            editTodo={editTodo}
-          />
+    <div className="d-flex justify-content-center mt-5">
+      <div className="bg-light p-5 rounded">
+        <h1 className="text-center">Todo List</h1>
+        <p className="text-center">By Justin Ho</p>
+        <div className="d-flex-column justify-content-around">
+          <div className="text-center mb-4">
+            <TodoForm
+              promptText="What to do?"
+              confirmText="Add"
+              onSubmit={addTodo}
+            />
+          </div>
+          <div>
+            <Todo
+              todos={todos}
+              completeTodo={completeTodo}
+              deleteTodo={deleteTodo}
+              editTodo={editTodo}
+              setTodos={setTodos}
+            />
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

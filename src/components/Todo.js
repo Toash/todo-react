@@ -1,12 +1,15 @@
 import { useState } from "react";
 import TodoList from "./TodoList";
 import TodoForm from "./TodoForm";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
-function Todo({ todos, completeTodo, deleteTodo, editTodo }) {
+function Todo({ todos, setTodos, completeTodo, deleteTodo, editTodo }) {
   const [edit, setEdit] = useState({
     id: null,
     text: "",
   });
+
+  const [complete, setComplete] = useState(false);
 
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
@@ -18,6 +21,17 @@ function Todo({ todos, completeTodo, deleteTodo, editTodo }) {
       id: null,
       text: "",
     });
+  }
+  // ?
+  function onDragEnd(result) {
+    if (!result.destination) return;
+
+    //put the drag item into the proper destination.
+    const updatedTodos = [...todos];
+    const [reorderedItem] = updatedTodos.splice(result.source.index, 1);
+    updatedTodos.splice(result.destination.index, 0, reorderedItem);
+
+    setTodos(updatedTodos);
   }
 
   //Instead of rendering todos, render an edit.
@@ -34,28 +48,47 @@ function Todo({ todos, completeTodo, deleteTodo, editTodo }) {
   }
 
   return (
-    <ul className="list-group">
-      {todos.map((todo, index) => (
-        <div
-          className={
-            index === selectedIndex
-              ? "list-group-item active"
-              : "list-group-item"
-          }
-          key={index}
-          onMouseOver={() => setSelectedIndex(index)}
-          onMouseOut={() => setSelectedIndex(-1)}
-        >
-          <div key={todo.id}>
-            {todo.text}
-            <button onClick={() => setEdit({ id: todo.id, text: todo.text })}>
-              Edit
-            </button>
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-          </div>
-        </div>
-      ))}
-    </ul>
+    <div>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="my-droppable">
+          {(provided) => (
+            <ol {...provided.droppableProps} ref={provided.innerRef}>
+              {todos.map((todo, index) => (
+                <Draggable
+                  key={todo.id}
+                  draggableId={todo.id.toString()}
+                  index={index}
+                >
+                  {(provided) => (
+                    <li
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      <div className="d-flex justify-content-between">
+                        <div>{todo.text}</div>
+                        <div>
+                          <button
+                            onClick={() =>
+                              setEdit({ id: todo.id, text: todo.text })
+                            }
+                          >
+                            Edit
+                          </button>
+                          <button onClick={() => deleteTodo(todo.id)}>
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    </li>
+                  )}
+                </Draggable>
+              ))}
+            </ol>
+          )}
+        </Droppable>
+      </DragDropContext>
+    </div>
   );
 }
 export default Todo;
