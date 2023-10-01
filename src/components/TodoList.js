@@ -27,7 +27,7 @@ function TodoList() {
   }
 
   return (
-    <div>
+    <div className="container">
       <p className="text-center text-primary">By Justin Ho</p>
       <div className="d-flex justify-content-center">
         <div className="todo-background">
