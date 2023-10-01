@@ -68,10 +68,10 @@ function Todo({ todos, setTodos, completeTodo, deleteTodo, editTodo }) {
                     >
                       <div>
                         <div className="d-flex justify-content-between">
-                          <div className="bg-primary w-75">
+                          <div className="w-75">
                             <div className=" text-break">{todo.text}</div>
                           </div>
-                          <div className="bg-primary">
+                          <div className="d-flex flex-wowrap">
                             <button
                               onClick={() =>
                                 setEdit({ id: todo.id, text: todo.text })

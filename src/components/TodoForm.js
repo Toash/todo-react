@@ -19,22 +19,24 @@ function TodoForm({ onSubmit, promptText, confirmText = "Submit" }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label className="mx-2" htmlFor="task">
-        {promptText}
-      </label>
+      <div className="d-flex flex-nowrap justify-content-center">
+        <label className="mx-2" htmlFor="task">
+          {promptText}
+        </label>
 
-      <input
-        className="mx-2"
-        id="task"
-        type="text"
-        autoFocus
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
+        <input
+          className="mx-2"
+          id="task"
+          type="text"
+          autoFocus
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
 
-      <button className="mx-2" type="submit">
-        {confirmText}
-      </button>
+        <button className="mx-2" type="submit">
+          {confirmText}
+        </button>
+      </div>
     </form>
   );
 }
