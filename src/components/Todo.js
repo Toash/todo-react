@@ -1,5 +1,4 @@
 import { useState } from "react";
-import TodoList from "./TodoList";
 import TodoForm from "./TodoForm";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
@@ -8,10 +7,6 @@ function Todo({ todos, setTodos, completeTodo, deleteTodo, editTodo }) {
     id: null,
     text: "",
   });
-
-  const [complete, setComplete] = useState(false);
-
-  const [selectedIndex, setSelectedIndex] = useState(-1);
 
   function submitUpdate(text) {
     editTodo(edit.id, text);

@@ -5,11 +5,6 @@ import TodoForm from "./TodoForm";
 function TodoList() {
   const [todos, setTodos] = useState([]);
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    addTodo();
-    event.target.task.focus();
-  }
   function addTodo(todo) {
     //if no input, return
     if (todo.text.trim() === "") {
@@ -31,16 +26,6 @@ function TodoList() {
     setTodos((prevItems) => prevItems.filter((item) => item.id !== id));
   }
 
-  function completeTodo(id) {
-    let updatedTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        todo.isComplete = !todo.isComplete;
-      }
-      //return todo
-    });
-    setTodos(updatedTodos);
-  }
-
   return (
     <div className="d-flex justify-content-center">
       <div className="todo-background">
@@ -57,7 +42,6 @@ function TodoList() {
           <div>
             <Todo
               todos={todos}
-              completeTodo={completeTodo}
               deleteTodo={deleteTodo}
               editTodo={editTodo}
               setTodos={setTodos}
